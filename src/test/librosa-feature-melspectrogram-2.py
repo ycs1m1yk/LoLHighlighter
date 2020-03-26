@@ -9,6 +9,8 @@ import time
 start_time = time.time()
 
 audio_path = "./audio/GRF vs kt - Round 1 Game 1  LCK Spring Split  Griffin vs kt Rolster (2020).mp4"
+duration_len = 60
+print("duration: ", duration_len)
 
 y, sr = librosa.load(audio_path, duration=60)
 librosa.feature.melspectrogram(y=y, sr=sr)
@@ -39,6 +41,6 @@ plt.title('Mel-frequency spectrogram')
 plt.tight_layout()
 
 elapsed_time = time.time() - start_time
-print("%.2f" % elapsed_time, "seconds")
+print("elapsed time: ", "%.2f" % elapsed_time, "seconds")
 
 plt.show()
