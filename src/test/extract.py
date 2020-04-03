@@ -2,7 +2,7 @@ from pytube import YouTube
 
 
 def audio_extraction(url):
-    filename = "audioExtraction"
+    filename = input('filename : ')
 
     parent_dir = r"./audio"
 
@@ -62,13 +62,12 @@ def print_default_filename(url):
         audio_extract_stream = yt.streams.filter(only_audio=True).first()
         video_extract_stream = yt.streams.filter(only_video=True).first()
 
-        print("audio default filename : ", audio_extract_stream.default_filename)
-        print("video default filename : ", video_extract_stream.default_filename)
+        print("audio default filename : ",
+              audio_extract_stream.default_filename)
+        print("video default filename : ",
+              video_extract_stream.default_filename)
 
     except Exception as e:
         print("URL Validation Error!", e)
         return e
-
-
-
 
