@@ -3,7 +3,8 @@ import subprocess
 
 import pytube
 
-yt = pytube.YouTube("https://youtu.be/DGvPe-EYhoo")  # 다운받을 동영상 URL 지정
+link = input('YouTube Link> ')
+yt = pytube.YouTube(link)  # 다운받을 동영상 URL 지정
 
 vids = yt.streams.all()
 
@@ -13,7 +14,7 @@ for i in range(len(vids)):
 
 vnum = int(input("다운 받을 화질은? "))
 
-parent_dir = r"C:\Users\satol\Documents\workspace\Python\LOLHighlighter\src\test\audio"  # 다운로드받을 디렉토리
+parent_dir = r".\audio"  # 다운로드받을 디렉토리
 vids[vnum].download(parent_dir)  # 다운로드 수행
 
 new_filename = input("변환 할 mp3 파일명은?")

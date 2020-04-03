@@ -8,7 +8,7 @@ import time
 
 start_time = time.time()
 
-audio_path = "./audio/GRF vs kt - Round 1 Game 1  LCK Spring Split  Griffin vs kt Rolster (2020).mp4"
+audio_path = "./audio/방청객_환호.wav"
 duration_len = 60
 
 y, sr = librosa.load(audio_path, duration=duration_len)
