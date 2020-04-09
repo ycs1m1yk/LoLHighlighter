@@ -6,7 +6,6 @@ import matplotlib.pyplot as plt
 def audio_test(directory):
     try:
         offset = 0
-        figure_num = 1
         duration = 360
         hits = []
 
@@ -27,17 +26,7 @@ def audio_test(directory):
                     hit_round = round(time[i] + offset)
                     hits.append(int(hit_round))
 
-            '''
-            # Graph output
-            plt.title(directory + ", num: " + str(figure_num))
-            plt.xlabel("Time(sec)")
-            plt.ylabel("Amplitude")
-            plt.plot(time, adjust, c='b', label='waveform')
-            plt.savefig(directory + ", num " + str(figure_num) + '.png')
-            plt.show()
-            '''
             offset += duration
-            figure_num += 1
             del y
 
         hits_remove_dup = list(set(hits))
