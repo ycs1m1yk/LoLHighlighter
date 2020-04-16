@@ -5,6 +5,10 @@ import librosa
 import librosa.display
 import time
 
+# TODO
+# ➡ Set Graph file output dir
+
+
 filename = input('filename : ')
 audio_path = "./audio/{0}".format(filename)
 
