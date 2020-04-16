@@ -1,17 +1,23 @@
 {% extends 'layout.html' %}
  
 {% block content %}
-<div class="container">
-  <div class="row">
-    <div class="col-md-8">
-      {% for post in posts %}
-      {% endfor %}
-    </div>
+<div class="container p-2">
+  <div>
+    <form method="GET" action="/highlight">
+      <label>유튜브 링크 입력</label>
+      <input type='text' name='youtube_url'>
+      <button type='submit'>Go</button>  
+    </form>
+  
   </div>
+  <p>
+    {% if youtube_url != None %}
+      <h5>{{youtube_url}}</h5>
+    {% endif %}
+  </p>
 </div>
 {% endblock %}
  
 {% block scripts %}
-
   <script src=https://cdnjs.cloudflare.com/ajax/libs/holder/2.9.4/holder.min.js></script>
 {% endblock %}
