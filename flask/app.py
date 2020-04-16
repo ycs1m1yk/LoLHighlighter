@@ -17,11 +17,11 @@ def highlight(youtube_url=None):
     url = request.args.get('youtube_url') 
     url = str(url)
     print(url)
-  
+    
   return render_template('index.html', youtube_url=url)
  
 @app.route('/about')
 def about():
-  return render_template('about.html')
+  return render_template('sample.html')
 
 app.run(debug=True)
