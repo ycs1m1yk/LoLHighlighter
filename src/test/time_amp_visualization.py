@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import librosa
 import librosa.display
 import time
+import os
 
 # TODO
 # ➡ Set Graph file output dir
@@ -28,7 +29,9 @@ plt.xlabel(xLabel)
 plt.ylabel(yLabel)
 plt.plot(xTime, y, c='b', label='waveform')
 plt.tight_layout()
-plt.savefig(filename+'.png')
+
+output_dir = os.path.join(os.getcwd()+"/output/")
+plt.savefig(output_dir+filename+'.png')
 plt.plot()
 
 elapsed_time = time.time() - start_time
