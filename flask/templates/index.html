@@ -42,7 +42,7 @@
         height: '360',
         width: '640',
         videoId: url,
-        start: offset, // 재생시작시간 파라미터인데 작동하지 않음..
+        playerVars: {rel: 0},//추천영상 안보여주게 설정
         events: {
           'onReady': onPlayerReady,
           'onStateChange': onPlayerStateChange
@@ -62,21 +62,20 @@
     
     // var done = false;
     function onPlayerStateChange(event) {
-      if (event.data == YT.PlayerState.PLAYING && !done) {
+      // if (event.data == YT.PlayerState.PLAYING && !done) {
         // setTimeout(stopVideo, 6000);
         // done = true;
+      // }
         var playerState;
-        function onPlayerStateChange(event) {
-          // state변화 체크
-            playerState = event.data == YT.PlayerState.ENDED ? '종료됨' :
-                    event.data == YT.PlayerState.PLAYING ? '재생 중' :
-                    event.data == YT.PlayerState.PAUSED ? '일시중지 됨' :
-                    event.data == YT.PlayerState.BUFFERING ? '버퍼링 중' :
-                    event.data == YT.PlayerState.CUED ? '재생준비 완료됨' :
-                    event.data == -1 ? '시작되지 않음' : '예외';
- 
-            console.log('onPlayerStateChange 실행: ' + playerState);
-      }
+        // state변화 체크
+        playerState = event.data == YT.PlayerState.ENDED ? '종료됨' :
+                event.data == YT.PlayerState.PLAYING ? '재생 중' :
+                event.data == YT.PlayerState.PAUSED ? '일시중지 됨' :
+                event.data == YT.PlayerState.BUFFERING ? '버퍼링 중' :
+                event.data == YT.PlayerState.CUED ? '재생준비 완료됨' :
+                event.data == -1 ? '시작되지 않음' : '예외';
+
+        console.log('onPlayerStateChange 실행: ' + playerState);
     }
     // function stopVideo() {
     //   player.stopVideo();
