@@ -36,8 +36,6 @@ def audio_test(directory):
         hits_remove_dup = list(set(hits))
         hits_remove_dup.sort()
 
-        print(hits_remove_dup)
-
         hl_start = hits_remove_dup[0]
         hl_temp = hits_remove_dup[0]
         hl_end = hits_remove_dup[1]
@@ -45,7 +43,6 @@ def audio_test(directory):
         hl_list = []
         iteration = 1
 
-        print(len(hits_remove_dup))
         while iteration < len(hits_remove_dup):
             count = 0
             while hl_end - hl_temp < 10:
