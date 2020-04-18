@@ -1,6 +1,5 @@
 import librosa
 import numpy as np
-import matplotlib.pyplot as plt
 
 
 def audio_test(directory):
@@ -14,7 +13,8 @@ def audio_test(directory):
             # add offset parameter for librosa.load() to specify starting time.
             # duration parameter is the total time that librosa analyze.
             try:
-                y, sr = librosa.load(directory, offset=offset, duration=duration)
+                y, sr = librosa.load(
+                    directory, offset=offset, duration=duration)
             except Exception as e:
                 print(e)
                 break
@@ -36,7 +36,7 @@ def audio_test(directory):
         hits_remove_dup = list(set(hits))
         hits_remove_dup.sort()
 
-        print('[hits_remove_dup] --', hits_remove_dup)
+        # print('[hits_remove_dup] --', hits_remove_dup)
 
         hl_start = hits_remove_dup[0]
         hl_temp = hits_remove_dup[0]
@@ -68,10 +68,10 @@ def audio_test(directory):
 
             iteration += 1
 
-        print('[highlight result]: ',hl_list)
-
+        print('[highlight result]: ', hl_list)
 
 
     except Exception as e:
         print(e)
 
+    return hl_list
