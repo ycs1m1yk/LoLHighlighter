@@ -16,7 +16,7 @@ def highlight(youtube_url=None):
   elif request.method == 'GET':
     url = request.args.get('youtube_url') 
     url = str(url)
-    print(url)
+    print('From browser: ', url)
     
   return render_template('index.html', youtube_url=url)
  
