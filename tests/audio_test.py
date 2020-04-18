@@ -14,7 +14,8 @@ def audio_test(directory):
             # add offset parameter for librosa.load() to specify starting time.
             # duration parameter is the total time that librosa analyze.
             try:
-                y, sr = librosa.load(directory, offset=offset, duration=duration)
+                y, sr = librosa.load(
+                    directory, offset=offset, duration=duration)
             except Exception as e:
                 print(e)
                 break
@@ -57,7 +58,7 @@ def audio_test(directory):
                 iteration += 1
                 count += 1
 
-            if hl_end != total_time:
+            if hl_end != hits_remove_dup[len(hits_remove_dup)-1]:
                 if count > 1:
                     element = [hl_start, hl_temp]
                     hl_list.append(element)
@@ -70,8 +71,5 @@ def audio_test(directory):
 
         print(hl_list)
 
-
-
     except Exception as e:
         print(e)
-
