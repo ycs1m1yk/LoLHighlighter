@@ -67,16 +67,9 @@ def audio_test(directory):
 
             iteration += 1
 
-<<<<<<< HEAD:tests/audio_test.py
-        print(hl_list)
-
-    except Exception as e:
-        print(e)
-=======
         print('[highlight result]: ', hl_list)
 
     except Exception as e:
         print(e)
 
     return hl_list
->>>>>>> 261aeeaaa7929eae291e71c0d9cdee215b586409:flask/audio_test.py

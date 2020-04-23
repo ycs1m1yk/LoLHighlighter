@@ -2,9 +2,7 @@ from pytube import YouTube
 
 
 def audio_extraction(url):
-    strArray = url.split('be/')
-    filename = strArray[1]
-    # filename = "audioExtraction"
+    filename = "audioExtraction"
 
     parent_dir = r"./audio"
 
