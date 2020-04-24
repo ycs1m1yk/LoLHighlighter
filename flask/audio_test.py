@@ -4,6 +4,7 @@ import numpy as np
 
 def audio_test(directory):
     try:
+        reSampleRate = 5500
         offset = 0
         duration = 360
         total_time = 0
@@ -14,7 +15,8 @@ def audio_test(directory):
             # duration parameter is the total time that librosa analyze.
             try:
                 y, sr = librosa.load(
-                    directory, offset=offset, duration=duration)
+                    directory, sr=reSampleRate, offset=offset, duration=duration)
+                print('sr: ', reSampleRate)
             except Exception as e:
                 print(e)
                 break
