@@ -20,7 +20,7 @@ def audio_test(directory):
             try:
                 y, sr = librosa.load(
                     directory, sr=reSampleRate, offset=offset, duration=duration)
-                print('sr: ', reSampleRate)
+                # print('sr: ', reSampleRate)
             except Exception as e:
                 print(e)
                 break
@@ -66,13 +66,22 @@ def audio_test(directory):
                 if count > 1:
                     element = [hl_start, hl_temp]
                     hl_list.append(element)
-                hl_start = hits_remove_dup[iteration]
-                hl_temp = hits_remove_dup[iteration]
-                hl_end = hits_remove_dup[iteration+1]
+                if iteration < len(hits_remove_dup)-1:
+                    hl_start = hits_remove_dup[iteration]
+                    hl_temp = hits_remove_dup[iteration]
+                    hl_end = hits_remove_dup[iteration+1]
 
             iteration += 1
 
+        # print(len(hl_list))
+        for i in range(len(hl_list)):
+            if hl_list[i][0] < 30:
+                hl_list[i][0] == 0
+            else:
+                hl_list[i][0] += -30
+            hl_list[i][1] += 30
         print('[highlight result]: ', hl_list)
+        print("Extraction finished")
 
         return hl_list
     except Exception as e:
