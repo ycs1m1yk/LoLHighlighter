@@ -1,9 +1,13 @@
 import librosa
 import numpy as np
+import warnings
+import sys
 
 
 def audio_test(directory):
+    warnings.filterwarnings("ignore")
     try:
+        print("Now Extracting H/L Time-Line")
         reSampleRate = 5500
         offset = 0
         duration = 360
@@ -62,7 +66,6 @@ def audio_test(directory):
                 if count > 1:
                     element = [hl_start, hl_temp]
                     hl_list.append(element)
-
                 hl_start = hits_remove_dup[iteration]
                 hl_temp = hits_remove_dup[iteration]
                 hl_end = hits_remove_dup[iteration+1]
@@ -71,7 +74,11 @@ def audio_test(directory):
 
         print('[highlight result]: ', hl_list)
 
+        return hl_list
     except Exception as e:
+        _, _, tb = sys.exc_info()  # tb -> traceback object
+        print('file name = ', __file__)
+        print('error line No = {}'.format(tb.tb_lineno))
         print(e)
 
-    return hl_list
+
