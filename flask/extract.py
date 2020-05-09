@@ -32,6 +32,9 @@ def audio_extraction(url):
 
 def video_extraction(url):
     filename = "video_extraction"
+
+    parent_dir = r"./video"
+
     print("Checking URL Validation...")
 
     try:
@@ -45,7 +48,7 @@ def video_extraction(url):
     print("Now Downloading...")
 
     try:
-        video_extract_stream.download(None, filename, None, True)
+        video_extract_stream.download(parent_dir, filename, None, True)
 
     except Exception as e:
         print("Download Fail!", e)
