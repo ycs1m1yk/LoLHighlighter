@@ -2,7 +2,7 @@ import time
 
 from extract import *
 from audio_test import audio_test
-
+from video_test import video_test
 
 def run_extraction(url):
     print(" ------------------------------------------")
@@ -15,10 +15,11 @@ def run_extraction(url):
         audio_filename = audio_extraction(YouTubeURL)
         video_filename = video_extraction(YouTubeURL)
         audio_dir = './audio/'+audio_filename+'.mp4'
-        video_dir = './video/'+video_filename+'.mp4'
+        video_dir = './video/'+video_filename
 
         start = time.time()
         offsets = audio_test(audio_dir)
+        video_test(video_dir, offsets)
 
     except Exception as e:
         print(e)
