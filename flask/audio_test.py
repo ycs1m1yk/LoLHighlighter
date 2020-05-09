@@ -53,7 +53,7 @@ def audio_test(directory):
 
         while iteration < len(hits_remove_dup):
             count = 0
-            while hl_end - hl_temp < 10:
+            while hl_end - hl_temp < 15:
 
                 if iteration == len(hits_remove_dup):
                     break
