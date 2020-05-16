@@ -2,7 +2,7 @@ import time
 
 from extract import *
 from audio_test import audio_test
-from video_test import video_test
+from video_test import get_game_start_time
 
 def run_extraction(url):
     print(" ------------------------------------------")
@@ -19,7 +19,7 @@ def run_extraction(url):
 
         start = time.time()
         offsets = audio_test(audio_dir)
-        video_test(video_dir, offsets)
+        get_game_start_time(video_dir)
 
     except Exception as e:
         print(e)
