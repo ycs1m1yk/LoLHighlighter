@@ -4,12 +4,12 @@ import warnings
 import sys
 
 
-def audio_test(directory):
+def audio_test(directory, game_start_time, game_end_time):
     warnings.filterwarnings("ignore")
     try:
         print("Now Extracting H/L Time-Line")
         reSampleRate = 5500
-        offset = 0
+        offset = game_start_time
         duration = 360
         total_time = 0
         hits = []
@@ -80,6 +80,12 @@ def audio_test(directory):
             else:
                 hl_list[i][0] += -30
             hl_list[i][1] += 30
+            if hl_list[i-1][1] < game_end_time < hl_list[i][0]:
+                hl_list.insert(i, [game_end_time-30, game_end_time])
+        if hl_list[-1][1] < game_end_time:
+            hl_list.append([game_end_time-40 , game_end_time])
+        hl_list.insert(0, [game_start_time, game_start_time+20])
+
         print('[highlight result]: ', hl_list)
         print("Extraction finished")
 
