@@ -5,7 +5,7 @@ def audio_extraction(url):
     filename = "audioExtraction"
 
     parent_dir = r"./audio"
-
+    print("START : audio extraction")
     print("Checking URL Validation...")
 
     try:
@@ -34,7 +34,7 @@ def video_extraction(url):
     filename = "video_extraction"
 
     parent_dir = r"./video"
-
+    print("START : video extraction")
     print("Checking URL Validation...")
 
     try:
