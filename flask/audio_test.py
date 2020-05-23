@@ -62,24 +62,23 @@ def audio_test(directory, game_start_time, game_end_time):
                 iteration += 1
                 count += 1
 
+            hit_count_val = 1
             if hl_end != hits_remove_dup[len(hits_remove_dup)-1]:
-                if count > 1:
+                if count > hit_count_val:
                     element = [hl_start, hl_temp]
                     hl_list.append(element)
                 if iteration < len(hits_remove_dup)-1:
-                    hl_start = hits_remove_dup[iteration]
-                    hl_temp = hits_remove_dup[iteration]
-                    hl_end = hits_remove_dup[iteration+1]
+                    hl_start = hits_remove_dup[iteration+1]
+                    hl_temp = hits_remove_dup[iteration+1]
+                    hl_end = hits_remove_dup[iteration+2]
 
             iteration += 1
 
         # print(len(hl_list))
+        interval_resize_val = 5
         for i in range(len(hl_list)):
-            if hl_list[i][0] < 30:
-                hl_list[i][0] == 0
-            else:
-                hl_list[i][0] += -30
-            hl_list[i][1] += 30
+            hl_list[i][0] += -interval_resize_val
+            hl_list[i][1] += interval_resize_val
             if hl_list[i-1][1] < game_end_time < hl_list[i][0]:
                 hl_list.insert(i, [game_end_time-30, game_end_time])
         if hl_list[-1][1] < game_end_time:
