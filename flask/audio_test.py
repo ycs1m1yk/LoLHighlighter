@@ -50,10 +50,10 @@ def audio_test(directory, game_start_time, game_end_time):
 
         hl_list = []
         iteration = 1
-
+        continue_val = 20
         while iteration < len(hits_remove_dup):
             count = 0
-            while hl_end - hl_temp < 10:
+            while hl_end - hl_temp < continue_val:
 
                 if iteration == len(hits_remove_dup):
                     break
@@ -68,9 +68,9 @@ def audio_test(directory, game_start_time, game_end_time):
                     element = [hl_start, hl_temp]
                     hl_list.append(element)
                 if iteration < len(hits_remove_dup)-1:
-                    hl_start = hits_remove_dup[iteration+1]
-                    hl_temp = hits_remove_dup[iteration+1]
-                    hl_end = hits_remove_dup[iteration+2]
+                    hl_start = hits_remove_dup[iteration]
+                    hl_temp = hits_remove_dup[iteration]
+                    hl_end = hits_remove_dup[iteration+1]
 
             iteration += 1
 
