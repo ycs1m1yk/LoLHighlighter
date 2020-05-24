@@ -38,8 +38,8 @@ def get_game_start_time(directory):
             print("ingame time :", time_split[0], ":", time_split[1])
             game_start_time = int(frame_now / fps) - (60 * int(time_split[0]) + int(time_split[1]))
             print("game start time :", game_start_time)
-            cv2.imwrite(directory + '_frame_%d.jpg' % game_start_time, image)
-            cv2.imwrite(directory + '_sub_frame_%d.jpg' % game_start_time, ocr_image)
+            # cv2.imwrite(directory + '_frame_%d.jpg' % game_start_time, image)
+            # cv2.imwrite(directory + '_sub_frame_%d.jpg' % game_start_time, ocr_image)
             return game_start_time
         else:
             frame_now -= fps * 60
