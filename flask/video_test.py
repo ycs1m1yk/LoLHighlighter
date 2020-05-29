@@ -4,11 +4,12 @@ import warnings
 import sys
 import pytesseract as ptsrt
 
+import flask.ocr_test2 as ocr
 
-time_ocr_x_1 = 940
-time_ocr_x_2 = 990
-time_ocr_y_1 = 75
-time_ocr_y_2 = 95
+# time_ocr_x_1 = 940
+# time_ocr_x_2 = 990
+# time_ocr_y_1 = 75
+# time_ocr_y_2 = 95
 
 
 def get_game_start_time(directory):
@@ -25,10 +26,7 @@ def get_game_start_time(directory):
         vid_cap.set(cv2.CAP_PROP_POS_FRAMES, frame_now)
         ret, image = vid_cap.read()
 
-        sub_image = image[time_ocr_y_1: time_ocr_y_2, time_ocr_x_1: time_ocr_x_2]
-        gray_sub_image = cv2.cvtColor(sub_image, cv2.COLOR_BGR2GRAY)
-        ocr_image = cv2.resize(gray_sub_image, (250, 100))
-        time_now = ptsrt.image_to_string(ocr_image)
+        time_now, kl, kr = ocr.do_ocr(image)
         time_split = time_now.split(":")
         digit_count = 0
         for i in time_split:
@@ -36,7 +34,8 @@ def get_game_start_time(directory):
                 digit_count += 1
         if digit_count == 2:
             print("ingame time :", time_split[0], ":", time_split[1])
-            game_start_time = int(frame_now / fps) - (60 * int(time_split[0]) + int(time_split[1]))
+            game_start_time = int(frame_now / fps) - \
+                (60 * int(time_split[0]) + int(time_split[1]))
             print("game start time :", game_start_time)
             # cv2.imwrite(directory + '_frame_%d.jpg' % game_start_time, image)
             # cv2.imwrite(directory + '_sub_frame_%d.jpg' % game_start_time, ocr_image)
@@ -62,10 +61,7 @@ def get_game_end_time(directory):
         vid_cap.set(cv2.CAP_PROP_POS_FRAMES, frame_now)
         ret, image = vid_cap.read()
 
-        sub_image = image[time_ocr_y_1: time_ocr_y_2, time_ocr_x_1: time_ocr_x_2]
-        gray_sub_image = cv2.cvtColor(sub_image, cv2.COLOR_BGR2GRAY)
-        ocr_image = cv2.resize(gray_sub_image, (250, 100))
-        time_now = ptsrt.image_to_string(ocr_image)
+        time_now, kl, kr = ocr.do_ocr(image)
         time_split = time_now.split(":")
         digit_count = 0
 
