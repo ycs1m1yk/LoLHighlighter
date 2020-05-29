@@ -1,27 +1,36 @@
-{% extends 'layout.html' %} {% block content %}
-<div class="container p-2">
+{% extends 'layout.html' %} 
+{% block content %}
+<div class="container p-5">
   <div>
     <form method="GET" action="/highlight">
-      <label>유튜브 링크 입력</label>
-      <input type="text" name="youtube_url" />
-      <button type="submit">Go</button>
+      <label for="youtube_url" >유튜브 링크 입력</label>
+      <div class="input-group">
+        <input type="text" name="youtube_url" class="form-control" />
+        <div class="input-group-btn">
+          <button type="submit" class="btn btn-default">Go</button>
+        </div>
+      </div>
     </form>
   </div>
   <div>
     <div>
-      {% if youtube_url != None %}
+      {% if youtube_url is not defined %}
+      <p class="navber-text mt-5">롤 하이라이트 추출기</p>
+      {% else %}
       <h5 id="urlName">{{youtube_url}}</h5>
+      <div id="player"></div>
       <div>
         {% for s, e in offsets %}
-        <button id="{{s}}" start={{s}} end={{e}} onclick="onButtonClick(this.id)">{{s}}</button>
-        {% endfor %}
+        <button class="btn btn-default" id="{{s}}" start={{s}} end={{e}} onclick="onButtonClick(this.id)">{{ s | time_format }}</button>
+        {% endfor %}  
       </div>
-      <div id="player"></div>
+      <br>
       {% endif %}
     </div>
   </div>
 </div>
-{% endblock %} {% block scripts %}
+{% endblock %}
+{% block scripts %}
 <script>
   var url = document.getElementById('urlName').innerText;
   var strArray = url.split('be/');
@@ -29,6 +38,7 @@
   console.log(url);
   // 2. This code loads the IFrame Player API code asynchronously.
   var tag = document.createElement('script');
+
 
   tag.src = 'https://www.youtube.com/iframe_api';
   var firstScriptTag = document.getElementsByTagName('script')[0];

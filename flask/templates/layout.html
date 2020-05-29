@@ -18,13 +18,16 @@
           integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
  
     <!-- Custom styles for this template -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='layout.css') }}">
+  
+    <link rel="stylesheet" href="../static/css/bootstrap-theme.css">
+    <link rel="stylesheet" href="../static/css/bootstrap.css">
+    <link rel="stylesheet" href="../static/layout.css">
     {% block stylesheet %}{% endblock %}
   </head>
  
   <body>
-    <header class="site-header">
-      <nav class="navbar navbar-expand-md fixed-top navbar-dark bg-dark mb-4">
+    <header class="site-header fixed-top">
+      <nav class="navbar navbar-expand-md fixed-top navbar-dark bg-dark">
         <a class="navbar-brand" href="{{ url_for('index') }}">LoL Highlighter</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -38,8 +41,6 @@
               <a class="nav-link" href="{{ url_for('about') }}">About</a>
             </li>
           </ul>
- 
-          <!-- Navbar right side -->    
         </div>
       </nav>
     </header>
@@ -64,6 +65,22 @@
             integrity="sha384-4oV5EgaV02iISL2ban6c/RmotsABqE4yZxZLcYMAdG7FAPsyHYAPpywE9PJo+Khy" crossorigin="anonymous"></script>
      
     <!-- Custom scripts -->
-    {% block scripts %}{% endblock %}
+    {% block scripts %}
+    
+    {% endblock %}
+
+    <br>
+  
+    <footer class="site-footer navbar-fixed-bottom bg-dark">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12 col-md-6">
+            <p class="text-justify" style="color: white;">2020 Spring Capstone Project - LOL Highlighter by Team Maltemers</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+  
+    
   </body>
 </html>

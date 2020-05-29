@@ -1,7 +1,9 @@
 from flask import Flask, render_template, request, url_for
 from run_extraction import run_extraction
+import datetime
 
 app = Flask(__name__, static_url_path='/static')
+
 
 @app.route('/')
 @app.route('/index')
@@ -27,4 +29,13 @@ def highlight(youtube_url=None):
  
 @app.route('/about')
 def about():
-  return render_template('sample.html')
+  return render_template('about.html')
+
+@app.template_filter('time_format')
+def time_format(t):
+    if t is None: 
+        return ''
+    
+    return str(datetime.timedelta(seconds=t))
+app.jinja_env.filters['time_format'] = time_format
+

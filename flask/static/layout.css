@@ -1,8 +1,19 @@
 html {
-    position: relative;
-    min-height: 100%;
-  }
-   
+  position: relative;
+  min-height: 100%;
+}
+ 
 body {
   padding-top: 56px;
 }
+
+footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: red;
+  color: white;
+  text-align: center;
+}
+
