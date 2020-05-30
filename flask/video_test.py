@@ -6,11 +6,6 @@ import pytesseract as ptsrt
 
 import flask.ocr_test as ocr
 
-# time_ocr_x_1 = 940
-# time_ocr_x_2 = 990
-# time_ocr_y_1 = 75
-# time_ocr_y_2 = 95
-
 
 def get_game_start_time(directory):
     print("START : get game start time")
@@ -26,7 +21,7 @@ def get_game_start_time(directory):
         vid_cap.set(cv2.CAP_PROP_POS_FRAMES, frame_now)
         ret, image = vid_cap.read()
 
-        time_now, kl, kr = ocr.do_ocr(image)
+        time_now, kl, kr = ocr.time_ocr(image)
         time_split = time_now.split(":")
         digit_count = 0
         for i in time_split:
@@ -61,7 +56,7 @@ def get_game_end_time(directory):
         vid_cap.set(cv2.CAP_PROP_POS_FRAMES, frame_now)
         ret, image = vid_cap.read()
 
-        time_now, kl, kr = ocr.do_ocr(image)
+        time_now, kl, kr = ocr.time_ocr(image)
         time_split = time_now.split(":")
         digit_count = 0
 
