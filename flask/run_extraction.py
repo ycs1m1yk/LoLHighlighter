@@ -10,10 +10,13 @@ def run_extraction(url):
     print(" Running extraction :", YouTubeURL)
     print(" ------------------------------------------")
 
+    offsets = None
     try:
         start = time.time()
         audio_filename = audio_extraction(YouTubeURL)
         video_filename = video_extraction(YouTubeURL)
+        # audio_filename = 'audioExtraction'
+        # video_filename = 'video_extraction'
         audio_dir = './audio/'+audio_filename+'.mp4'
         video_dir = './video/'+video_filename
 
@@ -27,4 +30,6 @@ def run_extraction(url):
 
     elapsed_time = time.time() - start
     print("elapsed time: ", "%.2f" % elapsed_time, "seconds")
+
+    print(f'offsets: {offsets}')
     return offsets

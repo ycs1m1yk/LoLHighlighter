@@ -9,22 +9,29 @@ import time
 
 # src 는 파일 위치 형식
 TOLERANCE = 30
-STEP = 2
+STEP = 1
 TRIAL = 0
+
+X1 = 650
+X2 = 1300
+Y1 = 40
+Y2 = 140
 
 
 def is_searched(src, tar):
-    source = Image.open(src)
+    source = Image.open(src).convert('RGB')
+    #source.show()
+    target = Image.open(tar).convert('RGB')
+    
+    if source.format != target.format: 
+        source.format = target.format
+    
+    source = source.crop((X1, Y1, X2, Y2))
     sx, sy = source.size
-    if type(tar) == str:
-        target = Image.open(tar)
-    else:
-        target = tar
-
     tx, ty = target.size
-
-    print("Source size: ", source.size)
-    print("Target size: ", target.size)
+    
+    print(src, "Source size: ", source.size, source.format)
+    print(tar, "Target size: ", target.size, target.format)
 
     draw = ImageDraw.Draw(source)
     start = time.time()
@@ -42,11 +49,9 @@ def is_searched(src, tar):
                                     target.height), outline=(255, 0, 0))
                     end = time.time()
                     print('Target Found!, searching time: ', end - start)
-                    source.show()
+                    # source.show()
                     return True
-                else:
-                    print("Target not found!")
-                    return False
+            
 
     end = time.time()
     print('Image search failed. searching time: ', end - start)
@@ -73,18 +78,18 @@ def Search(cx, cy, src, tar):
     tx, ty = tar.size
     # 타겟 이미지 크기 만큼 잘라낸다
     compare = src.crop((cx, cy, cx + tx, cy + ty))
-    # print('Compare size: ', compare.size)
+    print('Compare size: ', compare.size)
 
     diff = ImageChops.difference(compare, tar)
     stat = ImageStat.Stat(diff)
     global TRIAL
     if max(max(stat.extrema[0]), max(stat.extrema[1]), max(stat.extrema[2])) <= TOLERANCE:
-        # print("Target found(Min, max)", stat.extrema)
+        print("Target found(Min, max)", stat.extrema)
         return True
     else:
         TRIAL += 1
         return False
 
 
-#is_searched('./video/video_extraction_frame_53946.jpg', './images/ocean.png')
-is_searched('images/source.png', 'images/target.png')
+#is_searched('./video/video_extraction_frame_59364.png', './images/cloud.png')
+#is_searched('./images/source.png', './images/target.png')
