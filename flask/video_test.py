@@ -21,7 +21,7 @@ def get_game_start_time(directory):
         vid_cap.set(cv2.CAP_PROP_POS_FRAMES, frame_now)
         ret, image = vid_cap.read()
 
-        time_now, kl, kr = ocr.time_ocr(image)
+        time_now = ocr.time_ocr(image)
         time_split = time_now.split(":")
         digit_count = 0
         for i in time_split:
