@@ -4,7 +4,7 @@ import warnings
 import sys
 import pytesseract as ptsrt
 
-import flask.ocr_test2 as ocr
+import flask.ocr_test as ocr
 
 # time_ocr_x_1 = 940
 # time_ocr_x_2 = 990
@@ -70,8 +70,9 @@ def get_game_end_time(directory):
                 digit_count += 1
         if digit_count == 2:
             end_time = int(frame_now / fps) + 30
-        """else:
-            cv2.imwrite(directory + '_ocr_fail_%s.jpg' % time_now[:5], ocr_image)"""
+        # else:
+            # cv2.imwrite(directory + '_ocr_fail_%s.jpg' % time_now[:5], ocr_image)
+
         frame_now += fps * 30
     print("game end time :", end_time)
     return end_time
