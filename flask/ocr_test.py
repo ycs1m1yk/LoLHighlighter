@@ -45,7 +45,7 @@ def time_ocr(image):
     gray_time_image = cv2.cvtColor(time_image, cv2.COLOR_BGR2GRAY)
 
     # image resize
-    kill_ocr = cv2.resize(gray_time_image, (250, 100))
+    time_ocr = cv2.resize(gray_time_image, (250, 100))
 
     # ocr
     time_now = ptsrt.image_to_string(
