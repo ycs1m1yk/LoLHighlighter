@@ -5,22 +5,18 @@ import re
 
 tessdata_dir_config = '--tessdata-dir "C:\\Program Files\\Tesseract-OCR\\tessdata"'
 
-# time_ocr_x_1 = 630
-# time_ocr_x_2 = 661
-# time_ocr_y_1 = 51
-# time_ocr_y_2 = 63
-
 time_ocr_x_1 = 940
 time_ocr_x_2 = 990
 time_ocr_y_1 = 75
 time_ocr_y_2 = 95
 
-kill_ocr_x_1 = 602
-kill_ocr_x_2 = 683
-kill_ocr_y_1 = 11
-kill_ocr_y_2 = 37
+kill_ocr_x_1 = 916
+kill_ocr_x_2 = 1025
+kill_ocr_y_1 = 17
+kill_ocr_y_2 = 50
 
-# test_image = cv2.imread("test.png")
+# img = input("img: ")
+# test_image = cv2.imread(img)
 
 
 def isValid(string):
@@ -54,8 +50,6 @@ def time_ocr(image):
     # print("time_now:", time_now)
 
     # cv2.imshow('time', time_ocr)
-    # cv2.imshow('kill_l', kill_ocr_left)
-    # cv2.imshow('kill_r', kill_ocr_right)
     # cv2.waitKey(0)
     # cv2.destroyAllWindows()
 
@@ -70,14 +64,15 @@ def kill_ocr(image):
     gray_kill_image = cv2.cvtColor(kill_image, cv2.COLOR_BGR2GRAY)
 
     # image resize
-    kill_ocr = cv2.resize(gray_kill_image, (250, 100))
+    kill_ocr = cv2.resize(gray_kill_image, (240, 100))
 
+    # image threshold
     kill_threshold = cv2.threshold(
         kill_ocr, 0, 255, cv2.THRESH_BINARY | cv2.THRESH_OTSU)[1]
 
     # crop kill sub images
-    kill_ocr_left = kill_ocr[0:100, 0: 105]
-    kill_ocr_right = kill_ocr[0:100, 175: 245]
+    kill_ocr_left = kill_threshold[0:100, 4: 81]
+    kill_ocr_right = kill_threshold[0:100, 150: 227]
 
     # ocr
     kill_left = ptsrt.image_to_string(
@@ -111,4 +106,5 @@ def kill_ocr(image):
 
 
 # if __name__ == '__main__':
-#     do_ocr(test_image)
+#     time_ocr(test_image)
+#     kill_ocr(test_image)
