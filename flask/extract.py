@@ -1,10 +1,10 @@
 from pytube import YouTube
+import copy
+import string
 
 
 def audio_extraction(url):
-    filename = "audioExtraction"
 
-    parent_dir = r"./audio"
     print("START : audio extraction")
     print("Checking URL Validation...")
 
@@ -17,6 +17,11 @@ def audio_extraction(url):
         return e
 
     print("Now Downloading...")
+
+    filename_url = copy.deepcopy(url)
+    filename_url = filename_url.replace(":", "").replace("/", "").replace(".", "").strip()
+    filename = "audio_extraction_" + filename_url
+    parent_dir = r"./audio"
 
     try:
         audio_extract_stream.download(parent_dir, filename, None, True)
@@ -31,9 +36,7 @@ def audio_extraction(url):
 
 
 def video_extraction(url):
-    filename = "video_extraction"
 
-    parent_dir = r"./video"
     print("START : video extraction")
     print("Checking URL Validation...")
 
@@ -46,6 +49,11 @@ def video_extraction(url):
         return e
 
     print("Now Downloading...")
+
+    filename_url = copy.deepcopy(url)
+    filename_url = filename_url.replace(":", "").replace("/", "").replace(".", "").strip()
+    filename = "video_extraction_" + filename_url
+    parent_dir = r"./video"
 
     try:
         video_extract_stream.download(parent_dir, filename, None, True)
