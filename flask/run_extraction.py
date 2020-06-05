@@ -3,6 +3,8 @@ import time
 from extract import *
 from audio_test import audio_test
 from video_test import *
+from categorize import *
+
 
 def run_extraction(url):
     YouTubeURL = url
@@ -24,7 +26,8 @@ def run_extraction(url):
         game_start_time = get_game_start_time(video_dir)
         game_end_time = get_game_end_time(video_dir)
         offsets = audio_test(audio_dir, game_start_time, game_end_time)
-
+        offsets_categorized = categorize(offsets, video_dir, game_start_time, game_end_time)
+        print(offsets_categorized)
     except Exception as e:
         print(e)
 
