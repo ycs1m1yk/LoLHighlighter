@@ -86,7 +86,7 @@ def audio_test(directory, game_start_time, game_end_time):
         hl_list.insert(0, [game_start_time, game_start_time+20])
 
         print('[highlight result]: ', hl_list)
-        print("Extraction finished")
+        print("Audio analysis finished")
 
         return hl_list
     except Exception as e:
