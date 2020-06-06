@@ -10,31 +10,39 @@
         </div>
       </div>
     </form>
-  </div>
+  </div> 
   <div>
-    <div>
-      {% if youtube_url is not defined %}
-      <p class="navber-text mt-5">롤 하이라이트 추출기</p>
-      {% else %}
-      <h5 id="urlName">{{youtube_url}}</h5>
-      <div id="player"></div>
-      <div>
-        {% for s, e, c in offsets %}
-        <button
+    {% if youtube_url is not defined %}
+    <p class="navber-text mt-5">롤 하이라이트 추출기</p>
+    {% else %}
+
+    <h5 id="urlName">
+      <a href={{youtube_url}}>{{youtube_url}}</a>
+    </h5>
+    <div id="player"></div>
+
+    <div class="mt-5">
+      {% for cate, offset in category.items() %}
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">{{cate}}</h3>
+        </div>
+        <div class="panel-body">
+          {% for off in offset %}
+          <button
           class="btn btn-default"
-          id="{{s}}"
-          start="{{s}}"
-          end="{{e}}"
-          category="{{c}}"
+          id="{{off[0]}}"
+          start="{{off[0]}}"
+          end="{{off[1]}}"
           onclick="onButtonClick(this.id)"
-        >
-          {{ s | time_format }}
-        </button>
+          >
+          {{ off[0] | time_format }}
         {% endfor %}
       </div>
+      {% endfor %}   
       <br />
       {% endif %}
-    </div>
+    </>
   </div>
 </div>
 {% endblock %} {% block scripts %}

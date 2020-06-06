@@ -21,13 +21,11 @@ def highlight(youtube_url=None):
         url = str(url)
 
         try:
-            cat_offsets = run_extraction(url)
+            cat_offsets, cat_dict = run_extraction(url)
         except Exception as ex:
             print(ex)
 
-        print('From browser: ', url)
-
-        return render_template('index.html', youtube_url=url, offsets=jsonify(cat_offsets))
+        return render_template('index.html', youtube_url=url, offsets=cat_offsets, category=cat_dict)
 
 
 @app.route('/about')

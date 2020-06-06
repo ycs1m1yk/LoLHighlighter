@@ -35,4 +35,13 @@ def run_extraction(url):
     print("elapsed time: ", "%.2f" % elapsed_time, "seconds")
 
     print(f'offsets: {offsets}')
-    return offsets_categorized
+    cat_dict = {}
+    print('From browser: ', url)
+    for i in offsets_categorized: 
+        if i[2] not in cat_dict.keys(): 
+            cat_dict[i[2]] = [i[:2], ]
+        else: 
+            cat_dict[i[2]].append(i[:2])
+    print(cat_dict)
+    
+    return offsets_categorized, cat_dict
