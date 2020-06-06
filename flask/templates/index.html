@@ -1,9 +1,8 @@
-{% extends 'layout.html' %} 
-{% block content %}
+{% extends 'layout.html' %} {% block content %}
 <div class="container p-5">
   <div>
     <form method="GET" action="/highlight">
-      <label for="youtube_url" >유튜브 링크 입력</label>
+      <label for="youtube_url">유튜브 링크 입력</label>
       <div class="input-group">
         <input type="text" name="youtube_url" class="form-control" />
         <div class="input-group-btn">
@@ -20,42 +19,49 @@
       <h5 id="urlName">{{youtube_url}}</h5>
       <div id="player"></div>
       <div>
-        {% for s, e in offsets %}
-        <button class="btn btn-default" id="{{s}}" start={{s}} end={{e}} onclick="onButtonClick(this.id)">{{ s | time_format }}</button>
-        {% endfor %}  
+        {% for s, e, c in offsets %}
+        <button
+          class="btn btn-default"
+          id="{{s}}"
+          start="{{s}}"
+          end="{{e}}"
+          category="{{c}}"
+          onclick="onButtonClick(this.id)"
+        >
+          {{ s | time_format }}
+        </button>
+        {% endfor %}
       </div>
-      <br>
+      <br />
       {% endif %}
     </div>
   </div>
 </div>
-{% endblock %}
-{% block scripts %}
+{% endblock %} {% block scripts %}
 <script>
-  var url = document.getElementById('urlName').innerText;
-  var strArray = url.split('be/');
+  var url = document.getElementById("urlName").innerText;
+  var strArray = url.split("be/");
   url = strArray[1];
   console.log(url);
   // 2. This code loads the IFrame Player API code asynchronously.
-  var tag = document.createElement('script');
+  var tag = document.createElement("script");
 
-
-  tag.src = 'https://www.youtube.com/iframe_api';
-  var firstScriptTag = document.getElementsByTagName('script')[0];
+  tag.src = "https://www.youtube.com/iframe_api";
+  var firstScriptTag = document.getElementsByTagName("script")[0];
   firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
   // 3. This function creates an <iframe> (and YouTube player)
   //    after the API code downloads.
   var player;
   function onYouTubeIframeAPIReady() {
-    player = new YT.Player('player', {
-      height: '360',
-      width: '640',
+    player = new YT.Player("player", {
+      height: "360",
+      width: "640",
       videoId: url,
       playerVars: { rel: 0 }, //추천영상 안보여주게 설정
       events: {
-        'onReady': onPlayerReady,
-        'onStateChange': onPlayerStateChange,
+        onReady: onPlayerReady,
+        onStateChange: onPlayerStateChange,
       },
     });
   }
@@ -64,12 +70,13 @@
 
   function onButtonClick(id) {
     var offsetBtn = document.getElementById(id);
-    start = offsetBtn.getAttribute('start');
-    end = offsetBtn.getAttribute('end');
+    start = offsetBtn.getAttribute("start");
+    end = offsetBtn.getAttribute("end");
+    category = offsetBtn.getAttribute("category");
     duration = end - start;
-    console.log(start, end)
-    
-    player.seekTo(start)
+    console.log(start, end, category);
+
+    player.seekTo(start);
   }
 
   // 4. The API will call this function when the video player is ready.
@@ -93,20 +100,20 @@
     // state변화 체크
     playerState =
       event.data == YT.PlayerState.ENDED
-        ? '종료됨'
+        ? "종료됨"
         : event.data == YT.PlayerState.PLAYING
-        ? '재생 중'
+        ? "재생 중"
         : event.data == YT.PlayerState.PAUSED
-        ? '일시중지 됨'
+        ? "일시중지 됨"
         : event.data == YT.PlayerState.BUFFERING
-        ? '버퍼링 중'
+        ? "버퍼링 중"
         : event.data == YT.PlayerState.CUED
-        ? '재생준비 완료됨'
+        ? "재생준비 완료됨"
         : event.data == -1
-        ? '시작되지 않음'
-        : '예외';
+        ? "시작되지 않음"
+        : "예외";
 
-    console.log('onPlayerStateChange 실행: ' + playerState);
+    console.log("onPlayerStateChange 실행: " + playerState);
   }
   // function stopVideo() {
   //   player.stopVideo();

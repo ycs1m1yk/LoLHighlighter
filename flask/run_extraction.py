@@ -22,11 +22,11 @@ def run_extraction(url):
         audio_dir = './audio/'+audio_filename+'.mp4'
         video_dir = './video/'+video_filename
 
-
         game_start_time = get_game_start_time(video_dir)
         game_end_time = get_game_end_time(video_dir)
         offsets = audio_test(audio_dir, game_start_time, game_end_time)
-        offsets_categorized = categorize(offsets, video_dir, game_start_time, game_end_time)
+        offsets_categorized = categorize(
+            offsets, video_dir, game_start_time, game_end_time)
         print(offsets_categorized)
     except Exception as e:
         print(e)
@@ -35,4 +35,4 @@ def run_extraction(url):
     print("elapsed time: ", "%.2f" % elapsed_time, "seconds")
 
     print(f'offsets: {offsets}')
-    return offsets
+    return offsets_categorized
