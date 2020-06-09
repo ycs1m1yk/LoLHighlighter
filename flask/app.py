@@ -2,7 +2,12 @@ from flask import Flask, render_template, request, url_for, jsonify
 from run_extraction import run_extraction
 import datetime
 
+# config
+DEBUG = True
+
+# instantiate the app
 app = Flask(__name__, static_url_path='/static')
+app.config.from_object(__name__)
 
 
 @app.route('/')
@@ -42,3 +47,6 @@ def time_format(t):
 
 
 app.jinja_env.filters['time_format'] = time_format
+
+if __name__ == '__main__':
+    app.run()
