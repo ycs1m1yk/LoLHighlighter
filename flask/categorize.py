@@ -17,10 +17,10 @@ def categorize(offsets_input, directory, game_start_time, game_end_time):
         print("offset :", interval)
         # banpick
         if interval[0] <= game_start_time:
-            interval.append('banpick')
+            interval.append('Banpick')
         # after_game
         elif interval[0] > game_end_time:
-            interval.append('after_game')
+            interval.append('After Game')
         # detect_dragon_increase -> dragon
         # elif is_drake_increased(start, end, directory):
             # interval.append('dragon')
@@ -81,10 +81,10 @@ def categorize(offsets_input, directory, game_start_time, game_end_time):
             change = kill_left_change + kill_right_change
             print("change :", change)
             if change >= 2:
-                interval.append('teamfight')
+                interval.append('Kill & Teamfight')
             elif change > 0:
-                interval.append('kill')
+                interval.append('Kill & Teamfight')
             else:
-                interval.append('other_ingame')
+                interval.append('Other Ingame - SuperPlay, Replay, Pro view, etc..')
 
     return offsets
