@@ -83,7 +83,7 @@ def audio_test(directory, game_start_time, game_end_time):
                 hl_list.insert(i, [game_end_time-30, game_end_time])
         if hl_list[-1][1] < game_end_time:
             hl_list.append([game_end_time-40 , game_end_time])
-        hl_list.insert(0, [game_start_time, game_start_time+20])
+        hl_list.insert(0, [game_start_time-40, game_start_time+20])
 
         print('[highlight result]: ', hl_list)
         print("Audio analysis finished")
