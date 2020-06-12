@@ -23,7 +23,6 @@ def images_from_interval(start, end, directory):
         cv2.imwrite(store_directory, image)
         img_directories.append(store_directory)
 
-    print('image from intervals')
     return img_directories
 
 
@@ -45,5 +44,4 @@ def image_objects_from_interval(start, end, directory):
         # test file write for check output
         images.append(image)
 
-    print('image from intervals')
     return images

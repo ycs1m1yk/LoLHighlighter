@@ -14,7 +14,6 @@ import copy
 def categorize(offsets_input, directory, game_start_time, game_end_time):
     offsets = copy.deepcopy(offsets_input)
     for interval in offsets:
-        print("offset :", interval)
         # banpick
         if interval[0] <= game_start_time:
             interval.append('Banpick')
@@ -38,7 +37,6 @@ def categorize(offsets_input, directory, game_start_time, game_end_time):
             for num in range(len(images)):
                 valid_check = 0
                 left, right = kill_ocr(images[num])
-                print( "left / right :", left, right)
                 # digit validation
                 # all valid
                 if left.isdigit() and right.isdigit():
@@ -79,7 +77,7 @@ def categorize(offsets_input, directory, game_start_time, game_end_time):
                         right_valid = True
             # check kill change -> teamfight / kill / other_ingame
             change = kill_left_change + kill_right_change
-            print("change :", change)
+            
             if change >= 2:
                 interval.append('Kill & Teamfight')
             elif change > 0:

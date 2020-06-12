@@ -27,14 +27,12 @@ def run_extraction(url):
         offsets = audio_test(audio_dir, game_start_time, game_end_time)
         offsets_categorized = categorize(
             offsets, video_dir, game_start_time, game_end_time)
-        print(offsets_categorized)
+
     except Exception as e:
         print(e)
 
     elapsed_time = time.time() - start
     print("elapsed time: ", "%.2f" % elapsed_time, "seconds")
-
-    print(f'offsets: {offsets}')
     cat_dict = {}
     print('From browser: ', url)
     for i in offsets_categorized: 
