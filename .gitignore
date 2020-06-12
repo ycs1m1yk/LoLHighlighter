@@ -119,6 +119,6 @@ dmypy.json
 .history
 
 # audio files
-src/test/audio/
+*.mp4
 
 # End of https://www.gitignore.io/api/python,visualstudiocode

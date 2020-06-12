@@ -1,0 +1,130 @@
+{% extends 'layout.html' %} {% block content %}
+<div class="container p-5">
+  <div>
+    <form method="GET" action="/highlight">
+      <label for="youtube_url">유튜브 링크 입력</label>
+      <div class="input-group">
+        <input type="text" name="youtube_url" class="form-control" />
+        <div class="input-group-btn">
+          <button type="submit" class="btn btn-default">Go</button>
+        </div>
+      </div>
+    </form>
+  </div> 
+  <div>
+    {% if youtube_url is not defined %}
+    <p class="navber-text mt-5">롤 하이라이트 추출기</p>
+    {% else %}
+
+    <h5 id="urlName">
+      <a href={{youtube_url}}>{{youtube_url}}</a>
+    </h5>
+    <div id="player"></div>
+
+    <div class="mt-5">
+      {% for cate, offset in category.items() %}
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">{{cate}}</h3>
+        </div>
+        <div class="panel-body">
+          {% for off in offset %}
+          <button
+          class="btn btn-default"
+          id="{{off[0]}}"
+          start="{{off[0]}}"
+          end="{{off[1]}}"
+          onclick="onButtonClick(this.id)"
+          >
+          {{ off[0] | time_format }}
+        {% endfor %}
+      </div>
+      {% endfor %}   
+      <br />
+      {% endif %}
+    </>
+  </div>
+</div>
+{% endblock %} {% block scripts %}
+<script>
+  var url = document.getElementById("urlName").innerText;
+  var strArray = url.split("be/");
+  url = strArray[1];
+  console.log(url);
+  // 2. This code loads the IFrame Player API code asynchronously.
+  var tag = document.createElement("script");
+
+  tag.src = "https://www.youtube.com/iframe_api";
+  var firstScriptTag = document.getElementsByTagName("script")[0];
+  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+  // 3. This function creates an <iframe> (and YouTube player)
+  //    after the API code downloads.
+  var player;
+  function onYouTubeIframeAPIReady() {
+    player = new YT.Player("player", {
+      height: "360",
+      width: "640",
+      videoId: url,
+      playerVars: { rel: 0 }, //추천영상 안보여주게 설정
+      events: {
+        onReady: onPlayerReady,
+        onStateChange: onPlayerStateChange,
+      },
+    });
+  }
+
+  var offset = 0; // 서버에서 run_extraction.py를 돌리고 리턴한 하이라이트 시작지점
+
+  function onButtonClick(id) {
+    var offsetBtn = document.getElementById(id);
+    start = offsetBtn.getAttribute("start");
+    end = offsetBtn.getAttribute("end");
+    category = offsetBtn.getAttribute("category");
+    duration = end - start;
+    console.log(start, end, category);
+
+    player.seekTo(start);
+  }
+
+  // 4. The API will call this function when the video player is ready.
+  function onPlayerReady(event) {
+    event.target.playVideo();
+    event.target.seekTo(offset); // offset으로 재생시점 이동
+  }
+
+  // 5. The API calls this function when the player's state changes.
+  //    The function indicates that when playing a video (state=1),
+  //    the player should play for six seconds and then stop.
+
+  // var done = false;
+  function onPlayerStateChange(event) {
+    // if (event.data == YT.PlayerState.PLAYING && !done) {
+    //   setTimeout(stopVideo, 6000);
+    //   done = true;
+    // }
+
+    var playerState;
+    // state변화 체크
+    playerState =
+      event.data == YT.PlayerState.ENDED
+        ? "종료됨"
+        : event.data == YT.PlayerState.PLAYING
+        ? "재생 중"
+        : event.data == YT.PlayerState.PAUSED
+        ? "일시중지 됨"
+        : event.data == YT.PlayerState.BUFFERING
+        ? "버퍼링 중"
+        : event.data == YT.PlayerState.CUED
+        ? "재생준비 완료됨"
+        : event.data == -1
+        ? "시작되지 않음"
+        : "예외";
+
+    console.log("onPlayerStateChange 실행: " + playerState);
+  }
+  // function stopVideo() {
+  //   player.stopVideo();
+  // }
+</script>
+{% endblock %}
