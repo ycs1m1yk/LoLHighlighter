@@ -1,0 +1,22 @@
+digraph "packages_flask" {
+charset="utf-8"
+rankdir=BT
+"0" [label="pylint.pyreverse", shape="box"];
+"1" [label="pylint.pyreverse.diadefslib", shape="box"];
+"2" [label="pylint.pyreverse.diagrams", shape="box"];
+"3" [label="pylint.pyreverse.inspector", shape="box"];
+"4" [label="pylint.pyreverse.main", shape="box"];
+"5" [label="pylint.pyreverse.utils", shape="box"];
+"6" [label="pylint.pyreverse.vcgutils", shape="box"];
+"7" [label="pylint.pyreverse.writer", shape="box"];
+"1" -> "2" [arrowhead="open", arrowtail="none"];
+"1" -> "5" [arrowhead="open", arrowtail="none"];
+"2" -> "5" [arrowhead="open", arrowtail="none"];
+"3" -> "0" [arrowhead="open", arrowtail="none"];
+"4" -> "0" [arrowhead="open", arrowtail="none"];
+"4" -> "1" [arrowhead="open", arrowtail="none"];
+"4" -> "3" [arrowhead="open", arrowtail="none"];
+"4" -> "5" [arrowhead="open", arrowtail="none"];
+"7" -> "5" [arrowhead="open", arrowtail="none"];
+"7" -> "6" [arrowhead="open", arrowtail="none"];
+}
