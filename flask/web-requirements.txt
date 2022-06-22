@@ -21,7 +21,7 @@ librosa==0.7.2
 llvmlite==0.32.0
 MarkupSafe==1.1.1
 numba==0.49.0
-numpy==1.18.2
+numpy==1.22.0
 protobuf==3.11.3
 pyasn1==0.4.8
 pyasn1-modules==0.2.8
